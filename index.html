@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Financial Calculator</title>
+  <style>
+    body {
+  font-family: Arial, sans-serif;
+}
+
+.calculator {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+input[type="number"], select {
+  display: block;
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 5px;
+}
+
+button {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  background-color: #4CAF50;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+  </style>
+</head>
+<body>
+  <div class="calculator">
+    <h1>Financial Calculator</h1>
+    <label for="savings">Savings:</label>
+    <input type="number" id="savings" min="0">
+
+    <label for="income">Income:</label>
+    <input type="number" id="income" min="0">
+
+    <label for="expenses">Expenses:</label>
+    <input type="number" id="expenses" min="0">
+
+    <label for="frequency">Frequency:</label>
+    <select id="frequency">
+      <option value="annual">Annual</option>
+      <option value="monthly">Monthly</option>
+      <option value="weekly">Weekly</option>
+    </select>
+
+    <button onclick="calculate()">Calculate</button>
+  </div>
+
+  <script>
+    function calculate() {
+  const savings = parseFloat(document.getElementById('savings').value);
+  const income = parseFloat(document.getElementById('income').value);
+  const expenses = parseFloat(document.getElementById('expenses').value);
+  const frequency = document.getElementById('frequency').value;
+
+  let totalSavings, totalIncome, totalExpenses;
+
+  switch (frequency) {
+    case 'annual':
+      totalSavings = savings;
+      totalIncome = income;
+      totalExpenses = expenses;
+      break;
+    case 'monthly':
+      totalSavings = savings * 12;
+      totalIncome = income * 12;
+      totalExpenses = expenses * 12;
+      break;
+    case 'weekly':
+      totalSavings = savings * 52;
+      totalIncome = income * 52;
+      totalExpenses = expenses * 52;
+      break;
+  }
+
+  // Assuming you have landing page URLs for each result
+  const savingsPageURL = 'your-savings-landing-page-url';
+  const incomePageURL = 'your-income-landing-page-url';
+  const expensesPageURL = 'your-expenses-landing-page-url';
+
+  // Create buttons dynamically based on calculated results
+  const resultContainer = document.createElement('div');
+
+  const savingsButton = createButton('Savings', savingsPageURL);
+  const incomeButton = createButton('Income', incomePageURL);
+  const expensesButton = createButton('Expenses', expensesPageURL);
+
+  resultContainer.appendChild(savingsButton);
+  resultContainer.appendChild(incomeButton);
+  resultContainer.appendChild(expensesButton);
+
+  document.body.appendChild(resultContainer);
+}
+
+function createButton(label, url) {
+  const button = document.createElement('button');
+  button.textContent = `Total ${label}: $${totalSavings.toFixed(2)}`;
+  button.onclick = function() {
+    window.location.href = url;
+  };
+  return button;
+}
+  </script>
+</body>
+</html>
