@@ -63,59 +63,37 @@ button:hover {
   </div>
 
   <script>
-    function calculate() {
-  const savings = parseFloat(document.getElementById('savings').value);
-  const income = parseFloat(document.getElementById('income').value);
-  const expenses = parseFloat(document.getElementById('expenses').value);
-  const frequency = document.getElementById('frequency').value;
+   function calculate() {
+    // Your existing code for calculations
 
-  let totalSavings, totalIncome, totalExpenses;
+    // Assuming you have landing page URLs for each result
+    const savingsPageURL = 'https://viewmendoza.github.io/roboheart/';
+    const incomePageURL = 'https://viewmendoza.github.io/bauerresponsive/';
+    const expensesPageURL = 'https://viewmendoza.github.io/planetringrider/';
 
-  switch (frequency) {
-    case 'annual':
-      totalSavings = savings;
-      totalIncome = income;
-      totalExpenses = expenses;
-      break;
-    case 'monthly':
-      totalSavings = savings * 12;
-      totalIncome = income * 12;
-      totalExpenses = expenses * 12;
-      break;
-    case 'weekly':
-      totalSavings = savings * 52;
-      totalIncome = income * 52;
-      totalExpenses = expenses * 52;
-      break;
+    // Create buttons dynamically based on calculated results
+    const resultContainer = document.createElement('div');
+
+    const savingsButton = createButton('Savings', savingsPageURL, totalSavings);
+    const incomeButton = createButton('Income', incomePageURL, totalIncome);
+    const expensesButton = createButton('Expenses', expensesPageURL, totalExpenses);
+
+    resultContainer.appendChild(savingsButton);
+    resultContainer.appendChild(incomeButton);
+    resultContainer.appendChild(expensesButton);
+
+    document.body.appendChild(resultContainer);
   }
 
-  // Assuming you have landing page URLs for each result
-  const savingsPageURL = 'https://viewmendoza.github.io/roboheart/';
-  const incomePageURL = 'https://viewmendoza.github.io/bauerresponsive/';
-  const expensesPageURL = 'https://viewmendoza.github.io/planetringrider/';
-
-  // Create buttons dynamically based on calculated results
-  const resultContainer = document.createElement('div');
-
-  const savingsButton = createButton('Savings', savingsPageURL);
-  const incomeButton = createButton('Income', incomePageURL);
-  const expensesButton = createButton('Expenses', expensesPageURL);
-
-  resultContainer.appendChild(savingsButton);
-  resultContainer.appendChild(incomeButton);
-  resultContainer.appendChild(expensesButton);
-
-  document.body.appendChild(resultContainer);
-}
-
-function createButton(label, url) {
-  const button = document.createElement('button');
-  button.textContent = `Total ${label}: $${totalSavings.toFixed(2)}`;
-  button.onclick = function() {
-    window.location.href = url;
-  };
-  return button;
-}
+  function createButton(label, url, value) {
+    const button = document.createElement('button');
+    button.textContent = `Total ${label}: $${value.toFixed(2)}`;
+    button.setAttribute('aria-label', `Total ${label}: $${value.toFixed(2)}`);
+    button.onclick = function() {
+      window.location.href = url;
+    };
+    return button;
+  }
   </script>
 </body>
 </html>
