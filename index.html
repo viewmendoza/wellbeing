@@ -64,7 +64,33 @@ button:hover {
 
   <script>
    function calculate() {
-    // Your existing code for calculations
+    const savings = parseFloat(document.getElementById('savings').value);
+    const income = parseFloat(document.getElementById('income').value);
+    const expenses = parseFloat(document.getElementById('expenses').value);
+    const frequency = document.getElementById('frequency').value;
+
+    let totalSavings, totalIncome, totalExpenses;
+
+    switch (frequency) {
+      case 'annual':
+        totalSavings = savings;
+        totalIncome = income;
+        totalExpenses = expenses;
+        break;
+      case 'monthly':
+        totalSavings = savings * 12;
+        totalIncome = income * 12;
+        totalExpenses = expenses * 12;
+        break;
+      case 'weekly':
+        totalSavings = savings * 52;
+        totalIncome = income * 52;
+        totalExpenses = expenses * 52;
+        break;
+      default:
+        // Handle other frequency options, if needed
+        break;
+    }
 
     // Assuming you have landing page URLs for each result
     const savingsPageURL = 'https://viewmendoza.github.io/roboheart/';
